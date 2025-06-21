@@ -110,6 +110,7 @@ export function IssuesTable() {
     direction,
     setDirection,
     size,
+    errorObject,
   } = useGetIssues();
 
   const table = useReactTable({
@@ -258,7 +259,18 @@ export function IssuesTable() {
                 ))}
               </TableHeader>
               <TableBody>
-                {table.getRowModel().rows?.length ? (
+                {errorObject ? (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center text-red-500 font-semibold"
+                    >
+                      {errorObject.status === 403
+                        ? "spamming detected Api rate limiting activated"
+                        : errorObject.response?.data.message}
+                    </TableCell>
+                  </TableRow>
+                ) : table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row) => (
                     <TableRow
                       key={row.id}

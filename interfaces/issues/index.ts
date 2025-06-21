@@ -63,7 +63,15 @@ export interface PullRequest {
   performed_via_github_app: any | null;
 }
 
-
 export type IssueStatus = "open" | "closed" | "all";
 export type Sort = "created" | "updated" | "comments";
 export type Direction = "asc" | "desc";
+
+import { AxiosError } from "axios";
+
+interface GitHubAPIErrorResponse {
+  message: string;
+  documentation_url: string;
+}
+
+export type GitHubAxiosError = AxiosError<GitHubAPIErrorResponse>;

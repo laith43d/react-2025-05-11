@@ -1,8 +1,8 @@
-import { Direction, Sort } from "@/interfaces/issues/index";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getIssues } from "@/services";
-import { PullRequest, IssueStatus } from "@/interfaces/issues";
+import { AxiosError } from "axios";
+import { GitHubAxiosError } from "@/interfaces/issues";
 
 function useGetIssues() {
   const [issueState, setIssueState] = useState<string>("all");
@@ -10,7 +10,7 @@ function useGetIssues() {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
   const [sort, setSort] = useState<string>("created");
-
+  const [errorObject, setErrorObject] = useState<GitHubAxiosError | null>(null);
   const [direction, setDirection] = useState<string>("desc");
 
   const [debounceCreator, setDebounceCreator] = useState("");
@@ -22,7 +22,7 @@ function useGetIssues() {
     };
   }, [creator]);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: [
       "getIssues",
       issueState,
@@ -34,7 +34,15 @@ function useGetIssues() {
     ],
     queryFn: getIssues,
   });
-  
+
+  useEffect(() => {
+    if (error) {
+      setErrorObject(error as GitHubAxiosError);
+    } else {
+      setErrorObject(null);
+    }
+  }, [error]);
+
   const changeSize = (size: string) => {
     setSize(Number(size));
   };
@@ -48,6 +56,8 @@ function useGetIssues() {
   const onCreatorValueChange = (value: string) => {
     setCreator(value);
   };
+
+  console.log("error", error as AxiosError);
 
   return {
     issues: data,
@@ -65,6 +75,7 @@ function useGetIssues() {
     direction,
     setDirection,
     size,
+    errorObject,
   };
 }
 
