@@ -1,0 +1,7 @@
+- use shadcin inputs for filters 
+- refactor column creation
+- sync queries 
+- error handling 
+- skleton loading
+- empty state 
+- performance improvements
