@@ -17,6 +17,7 @@ export interface StatusProps {
   sort: string;
   setSort: Dispatch<SetStateAction<string>>;
 }
+
 export function SortRadioGroup({ sort, setSort }: StatusProps) {
   return (
     <DropdownMenu>

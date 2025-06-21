@@ -34,6 +34,7 @@ function useGetIssues() {
     ],
     queryFn: getIssues,
   });
+  
   const changeSize = (size: string) => {
     setSize(Number(size));
   };

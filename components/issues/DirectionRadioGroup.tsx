@@ -21,6 +21,7 @@ export function DirectionRadioGroup({ direction, setDirection }: StatusProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
+        
         <Button variant="outline" className="text-xs sm:text-sm">
           direction:{direction}
         </Button>

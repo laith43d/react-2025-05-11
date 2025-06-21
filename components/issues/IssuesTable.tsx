@@ -34,6 +34,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import useGetIssues from "@/hooks/issues/useGetIssues";
+
 import { PullRequest } from "@/interfaces/issues";
 import { StatusRadioGroup } from "./StatusRadioGroup";
 import { SortRadioGroup } from "./SortRadioGroup";

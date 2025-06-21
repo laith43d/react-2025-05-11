@@ -63,6 +63,7 @@ export interface PullRequest {
   performed_via_github_app: any | null;
 }
 
+
 export type IssueStatus = "open" | "closed" | "all";
 export type Sort = "created" | "updated" | "comments";
 export type Direction = "asc" | "desc";
